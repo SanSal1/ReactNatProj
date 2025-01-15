@@ -1,11 +1,11 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native'
 
 export default function UsersScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Users</Text>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
   text: {
     color: '#FFFFFF',
   },
-});
+})
