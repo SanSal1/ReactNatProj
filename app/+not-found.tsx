@@ -1,9 +1,9 @@
 import { Text, View, StyleSheet } from 'react-native';
 
-export default function Index() {
+export default function NotFound() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Home screen</Text>
+      <Text style={styles.text}>404</Text>
     </View>
   );
 }
@@ -11,9 +11,9 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2B2B2B',
-    alignItems: 'center',
+    backgroundColor: '#BD2F2F',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   text: {
     color: '#FFFFFF',
