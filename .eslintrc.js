@@ -9,5 +9,5 @@ module.exports = {
       },
     ],
   },
-  ignorePatterns: ['/dist/*'],
+  ignorePatterns: ['/dist/*', 'expo-env.d.ts'],
 }

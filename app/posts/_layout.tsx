@@ -1,7 +1,9 @@
 import { Tabs } from 'expo-router'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
+import { useTranslation } from 'react-i18next'
 
 export default function RootLayout() {
+  const { t } = useTranslation()
   return (
     <Tabs
       screenOptions={{
@@ -13,7 +15,7 @@ export default function RootLayout() {
       <Tabs.Screen
         name='index'
         options={{
-          title: 'Feed',
+          title: t('POSTS'),
           tabBarIcon: ({ color }) => (
             <MaterialIcons size={24} name='view-list' color={color} />
           ),
@@ -22,7 +24,7 @@ export default function RootLayout() {
       <Tabs.Screen
         name='users'
         options={{
-          title: 'Users',
+          title: t('USERS'),
           tabBarIcon: ({ color }) => (
             <MaterialIcons name='group' size={24} color={color} />
           ),
