@@ -1,14 +1,16 @@
 import { Tabs } from 'expo-router'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { useTranslation } from 'react-i18next'
+import { useTheme } from 'react-native-paper'
 
 export default function RootLayout() {
   const { t } = useTranslation()
+  const theme = useTheme()
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: 'steelblue',
+        tabBarActiveTintColor: theme.colors.primary,
         tabBarStyle: { height: 54 },
       }}
     >

@@ -1,9 +1,13 @@
-import { Text, View, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import { useTheme, Text } from 'react-native-paper'
 
 export default function NotFound() {
+  const theme = useTheme()
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>404</Text>
+    <View style={[styles.container, { backgroundColor: theme.colors.onError }]}>
+      <Text variant='headlineLarge' style={{ color: theme.colors.error }}>
+        404
+      </Text>
     </View>
   )
 }
@@ -11,11 +15,7 @@ export default function NotFound() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#BD2F2F',
-    justifyContent: 'center',
     alignItems: 'center',
-  },
-  text: {
-    color: '#FFFFFF',
+    justifyContent: 'center',
   },
 })

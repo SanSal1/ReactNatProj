@@ -1,9 +1,18 @@
-import { Text, View, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import { useTheme, Text } from 'react-native-paper'
 
 export default function Index() {
+  const theme = useTheme()
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Home screen</Text>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
+      <Text
+        variant='headlineLarge'
+        style={{ color: theme.colors.onBackground }}
+      >
+        Home screen
+      </Text>
     </View>
   )
 }
@@ -11,11 +20,7 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2B2B2B',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  text: {
-    color: '#FFFFFF',
   },
 })
