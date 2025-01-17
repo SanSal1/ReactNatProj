@@ -6,17 +6,24 @@ import { Pressable, View } from 'react-native'
 import { useEffect, useState } from 'react'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
-import { IconButton, PaperProvider, Text } from 'react-native-paper'
+import {
+  configureFonts,
+  IconButton,
+  PaperProvider,
+  Text,
+} from 'react-native-paper'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import IconDropdown from '@/components/IconDropdown'
-import { darkTheme, lightTheme } from '@/themes'
+import { darkTheme, lightTheme, fontConfig } from '@/themes'
 import { ThemeMode } from '@/types'
 
 const langs = [
   { label: 'EN', value: 'en' },
   { label: 'FI', value: 'fi' },
 ]
+
+const fonts = configureFonts({ config: fontConfig })
 
 export default function RootLayout() {
   const { t, i18n } = useTranslation()
@@ -49,7 +56,10 @@ export default function RootLayout() {
     loadTheme()
   }, [])
 
-  const theme = themeMode === ThemeMode.LIGHT ? lightTheme : darkTheme
+  const theme = {
+    ...(themeMode === ThemeMode.LIGHT ? lightTheme : darkTheme),
+    fonts,
+  }
 
   const [loaded] = useFonts({
     SpaceGrotesk: require('../assets/fonts/SpaceGrotesk-Regular.ttf'),
@@ -71,7 +81,9 @@ export default function RootLayout() {
         <Drawer
           screenOptions={{
             drawerActiveTintColor: theme.colors.primary,
+            drawerStyle: { backgroundColor: theme.colors.surface },
             drawerLabelStyle: {
+              color: theme.colors.onSurface,
               fontFamily: 'SpaceGrotesk',
               fontSize: 16,
               fontWeight: 600,
@@ -143,8 +155,16 @@ export default function RootLayout() {
             name='index'
             options={{
               title: t('HOME'),
-              drawerIcon: ({ color }) => (
-                <MaterialIcons size={24} name='home' color={color} />
+              drawerIcon: ({ focused }) => (
+                <MaterialIcons
+                  size={24}
+                  name='home'
+                  color={
+                    focused
+                      ? theme.colors.primary
+                      : theme.colors.onPrimaryContainer
+                  }
+                />
               ),
             }}
           />
@@ -152,8 +172,16 @@ export default function RootLayout() {
             name='posts'
             options={{
               title: t('POSTS'),
-              drawerIcon: ({ color }) => (
-                <MaterialIcons size={24} name='view-list' color={color} />
+              drawerIcon: ({ focused }) => (
+                <MaterialIcons
+                  size={24}
+                  name='view-list'
+                  color={
+                    focused
+                      ? theme.colors.primary
+                      : theme.colors.onPrimaryContainer
+                  }
+                />
               ),
             }}
           />

@@ -11,10 +11,15 @@ export default function RootLayout() {
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: theme.colors.primary,
-        tabBarStyle: { height: 54 },
+        tabBarStyle: {
+          height: 58,
+          backgroundColor: theme.colors.surface,
+          borderColor: theme.colors.surfaceVariant,
+        },
         tabBarLabelStyle: {
+          color: theme.colors.onSurface,
           fontFamily: 'SpaceGrotesk',
-          fontSize: 16,
+          fontSize: 14,
           fontWeight: 600,
         },
       }}
@@ -23,8 +28,14 @@ export default function RootLayout() {
         name='index'
         options={{
           title: t('POSTS'),
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons size={24} name='view-list' color={color} />
+          tabBarIcon: ({ focused }) => (
+            <MaterialIcons
+              size={24}
+              name='view-list'
+              color={
+                focused ? theme.colors.primary : theme.colors.onPrimaryContainer
+              }
+            />
           ),
         }}
       />
@@ -32,8 +43,14 @@ export default function RootLayout() {
         name='users'
         options={{
           title: t('USERS'),
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name='group' size={24} color={color} />
+          tabBarIcon: ({ focused }) => (
+            <MaterialIcons
+              name='group'
+              size={24}
+              color={
+                focused ? theme.colors.primary : theme.colors.onPrimaryContainer
+              }
+            />
           ),
         }}
       />

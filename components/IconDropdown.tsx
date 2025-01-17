@@ -1,7 +1,5 @@
-import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { useState } from 'react'
-import { View } from 'react-native'
-import { IconButton, Menu, Text, useTheme } from 'react-native-paper'
+import { IconButton, Menu } from 'react-native-paper'
 
 export default function IconDropdown({
   options,
@@ -16,7 +14,6 @@ export default function IconDropdown({
   icon: string
   color: string
 }) {
-  const theme = useTheme()
   const [visible, setVisible] = useState(false)
   const openMenu = () => setVisible(true)
   const closeMenu = () => setVisible(false)
@@ -25,6 +22,7 @@ export default function IconDropdown({
       visible={visible}
       onDismiss={closeMenu}
       anchorPosition='bottom'
+      style={{ width: 150 }}
       anchor={
         <IconButton
           icon={icon}
@@ -43,33 +41,8 @@ export default function IconDropdown({
               onChange(option.value)
               closeMenu()
             }}
-            title={
-              <View
-                style={{
-                  width: '100%',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  paddingVertical: 4,
-                }}
-              >
-                <Text
-                  variant='labelLarge'
-                  style={{
-                    opacity: isSelected ? 0.5 : 1,
-                  }}
-                >
-                  {option.label}
-                </Text>
-                {isSelected && (
-                  <MaterialIcons
-                    name='check'
-                    size={24}
-                    color={theme.colors.secondary}
-                  />
-                )}
-              </View>
-            }
+            title={option.label}
+            trailingIcon={isSelected ? 'check' : undefined}
             disabled={isSelected}
             dense
           />
