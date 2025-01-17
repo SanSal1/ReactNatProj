@@ -4,6 +4,8 @@ import '@/i18n/index'
 import { useTranslation } from 'react-i18next'
 import { Pressable, View } from 'react-native'
 import { useEffect, useState } from 'react'
+import { useFonts } from 'expo-font'
+import * as SplashScreen from 'expo-splash-screen'
 import { IconButton, PaperProvider, Text } from 'react-native-paper'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
@@ -49,12 +51,31 @@ export default function RootLayout() {
 
   const theme = themeMode === ThemeMode.LIGHT ? lightTheme : darkTheme
 
+  const [loaded] = useFonts({
+    SpaceGrotesk: require('../assets/fonts/SpaceGrotesk-Regular.ttf'),
+  })
+
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync()
+    }
+  }, [loaded])
+
+  if (!loaded) {
+    return null
+  }
+
   return (
     <PaperProvider theme={theme}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Drawer
           screenOptions={{
             drawerActiveTintColor: theme.colors.primary,
+            drawerLabelStyle: {
+              fontFamily: 'SpaceGrotesk',
+              fontSize: 16,
+              fontWeight: 600,
+            },
             header: ({ navigation, options }) => (
               <View
                 style={{
@@ -84,7 +105,7 @@ export default function RootLayout() {
                     />
                   </Pressable>
                   <Text
-                    variant='titleLarge'
+                    variant='headlineSmall'
                     style={{
                       fontWeight: 500,
                       color: theme.colors.onPrimary,

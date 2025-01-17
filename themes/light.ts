@@ -1,4 +1,5 @@
-import { DefaultTheme } from 'react-native-paper'
+import { configureFonts, DefaultTheme } from 'react-native-paper'
+import { fontConfig } from './fontConfig'
 
 export const lightTheme = {
   ...DefaultTheme,
@@ -44,4 +45,5 @@ export const lightTheme = {
     onSurfaceDisabled: 'rgba(28, 27, 30, 0.38)',
     backdrop: 'rgba(50, 47, 56, 0.4)',
   },
+  fonts: configureFonts({ config: fontConfig }),
 }

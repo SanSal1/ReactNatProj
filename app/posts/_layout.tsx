@@ -12,6 +12,11 @@ export default function RootLayout() {
         headerShown: false,
         tabBarActiveTintColor: theme.colors.primary,
         tabBarStyle: { height: 54 },
+        tabBarLabelStyle: {
+          fontFamily: 'SpaceGrotesk',
+          fontSize: 16,
+          fontWeight: 600,
+        },
       }}
     >
       <Tabs.Screen
