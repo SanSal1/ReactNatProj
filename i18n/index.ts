@@ -5,10 +5,11 @@ import { getLocales } from 'expo-localization'
 
 import en from './locales/en.json'
 import fi from './locales/fi.json'
+import { ASYNC_STORAGE_KEYS } from '@/assets/constants'
 
 const initI18n = async () => {
   const systemLanguage = getLocales()[0]?.languageCode
-  const savedLanguage = await AsyncStorage.getItem('locale')
+  const savedLanguage = await AsyncStorage.getItem(ASYNC_STORAGE_KEYS.LOCALE)
   i18n.use(initReactI18next).init({
     lng: savedLanguage ?? systemLanguage ?? undefined,
     fallbackLng: 'en',

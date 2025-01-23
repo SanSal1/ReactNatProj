@@ -18,6 +18,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import IconDropdown from '@/components/IconDropdown'
 import { darkTheme, lightTheme, fontConfig, spacing } from '@/themes'
 import { ThemeMode } from '@/types'
+import { ASYNC_STORAGE_KEYS } from '@/assets/constants'
 
 const langs = [
   { label: 'EN', value: 'en' },
@@ -33,19 +34,21 @@ export default function RootLayout() {
   const [themeMode, setThemeMode] = useState<ThemeMode>(ThemeMode.LIGHT)
 
   const changeLanguage = async (lang: string) => {
-    await AsyncStorage.setItem('locale', lang)
+    await AsyncStorage.setItem(ASYNC_STORAGE_KEYS.LOCALE, lang)
     i18n.changeLanguage(lang)
   }
 
   const toggleTheme = async () => {
     const newValue =
       themeMode === ThemeMode.LIGHT ? ThemeMode.DARK : ThemeMode.LIGHT
-    await AsyncStorage.setItem('isLightTheme', newValue)
+    await AsyncStorage.setItem(ASYNC_STORAGE_KEYS.THEME_MODE, newValue)
     setThemeMode(newValue)
   }
 
   const loadTheme = async () => {
-    const savedThemeMode = await AsyncStorage.getItem('locale')
+    const savedThemeMode = await AsyncStorage.getItem(
+      ASYNC_STORAGE_KEYS.THEME_MODE,
+    )
     if (
       savedThemeMode === ThemeMode.LIGHT ||
       savedThemeMode === ThemeMode.DARK
@@ -192,12 +195,6 @@ export default function RootLayout() {
               name='+not-found'
               options={{
                 title: t('NOT_FOUND_PAGE'),
-                drawerItemStyle: { display: 'none' },
-              }}
-            />
-            <Drawer.Screen
-              name='(stack)'
-              options={{
                 drawerItemStyle: { display: 'none' },
               }}
             />

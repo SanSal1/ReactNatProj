@@ -11,3 +11,8 @@ export const CACHE_KEYS = {
   USERS: 'users',
   USER: 'user',
 }
+
+export const ASYNC_STORAGE_KEYS = {
+  THEME_MODE: 'themeMode',
+  LOCALE: 'locale',
+}
