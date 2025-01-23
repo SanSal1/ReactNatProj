@@ -1,6 +1,9 @@
 {
-    "HOME": "Koti",
-    "NOT_FOUND_PAGE": "404: Sivua ei ole olemassa",
-    "POSTS": "Postaukset",
-    "USERS": "Käyttäjät"
+  "ERROR": "Virhe",
+  "HOME": "Koti",
+  "LIST": "Lista",
+  "NOT_FOUND_PAGE": "404: Sivua ei ole olemassa",
+  "TODOS": "Muistiinpanot",
+  "UNABLE_TO_FETCH": "Datan hakeminen palvelimelta epäonnistui",
+  "USERS": "Käyttäjät"
 }

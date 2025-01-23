@@ -1,6 +1,9 @@
 {
-    "HOME": "Home",
-    "NOT_FOUND_PAGE": "404: Page not found",
-    "POSTS": "Posts",
-    "USERS": "Users"
+  "ERROR": "Error",
+  "HOME": "Home",
+  "LIST": "List",
+  "NOT_FOUND_PAGE": "404: Page not found",
+  "TODOS": "Todos",
+  "UNABLE_TO_FETCH": "Unable to fetch data from the server",
+  "USERS": "Users"
 }

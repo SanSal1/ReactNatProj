@@ -25,9 +25,9 @@ export default function RootLayout() {
       }}
     >
       <Tabs.Screen
-        name='index'
+        name='list'
         options={{
-          title: t('POSTS'),
+          title: t('LIST'),
           tabBarIcon: ({ focused }) => (
             <MaterialIcons
               size={24}

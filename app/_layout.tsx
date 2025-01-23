@@ -6,6 +6,7 @@ import { Pressable, View } from 'react-native'
 import { useEffect, useState } from 'react'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import {
   configureFonts,
   IconButton,
@@ -15,7 +16,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import IconDropdown from '@/components/IconDropdown'
-import { darkTheme, lightTheme, fontConfig } from '@/themes'
+import { darkTheme, lightTheme, fontConfig, spacing } from '@/themes'
 import { ThemeMode } from '@/types'
 
 const langs = [
@@ -26,6 +27,7 @@ const langs = [
 const fonts = configureFonts({ config: fontConfig })
 
 export default function RootLayout() {
+  const queryClient = new QueryClient()
   const { t, i18n } = useTranslation()
   const currentLanguage = i18n.language
   const [themeMode, setThemeMode] = useState<ThemeMode>(ThemeMode.LIGHT)
@@ -77,123 +79,131 @@ export default function RootLayout() {
 
   return (
     <PaperProvider theme={theme}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <Drawer
-          screenOptions={{
-            drawerActiveTintColor: theme.colors.primary,
-            drawerStyle: { backgroundColor: theme.colors.surface },
-            drawerLabelStyle: {
-              color: theme.colors.onSurface,
-              fontFamily: 'SpaceGrotesk',
-              fontSize: 16,
-              fontWeight: 600,
-            },
-            header: ({ navigation, options }) => (
-              <View
-                style={{
-                  backgroundColor: theme.colors.primary,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: 8,
-                  height: 66,
-                }}
-              >
+      <QueryClientProvider client={queryClient}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Drawer
+            screenOptions={{
+              drawerActiveTintColor: theme.colors.primary,
+              drawerStyle: { backgroundColor: theme.colors.surface },
+              drawerLabelStyle: {
+                color: theme.colors.onSurface,
+                fontFamily: 'SpaceGrotesk',
+                fontSize: 16,
+                fontWeight: 600,
+              },
+              header: ({ navigation, options }) => (
                 <View
                   style={{
+                    backgroundColor: theme.colors.primary,
                     flexDirection: 'row',
                     alignItems: 'center',
-                    columnGap: 8,
+                    justifyContent: 'space-between',
+                    padding: spacing(1),
+                    height: 66,
                   }}
                 >
-                  <Pressable
-                    onPress={() => navigation.openDrawer()}
-                    style={{ padding: 8 }}
-                  >
-                    <MaterialIcons
-                      name='menu'
-                      size={28}
-                      color={theme.colors.onPrimary}
-                    />
-                  </Pressable>
-                  <Text
-                    variant='headlineSmall'
+                  <View
                     style={{
-                      fontWeight: 500,
-                      color: theme.colors.onPrimary,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      columnGap: spacing(1),
                     }}
                   >
-                    {options.title}
-                  </Text>
+                    <Pressable
+                      onPress={() => navigation.openDrawer()}
+                      style={{ padding: spacing(1) }}
+                    >
+                      <MaterialIcons
+                        name='menu'
+                        size={28}
+                        color={theme.colors.onPrimary}
+                      />
+                    </Pressable>
+                    <Text
+                      variant='headlineSmall'
+                      style={{
+                        fontWeight: 500,
+                        color: theme.colors.onPrimary,
+                      }}
+                    >
+                      {options.title}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      columnGap: spacing(0.5),
+                    }}
+                  >
+                    <IconButton
+                      icon='theme-light-dark'
+                      iconColor={theme.colors.onPrimary}
+                      size={24}
+                      onPress={toggleTheme}
+                    />
+                    <IconDropdown
+                      icon='translate'
+                      color={theme.colors.onPrimary}
+                      options={langs}
+                      onChange={changeLanguage}
+                      selectedOption={currentLanguage}
+                    />
+                  </View>
                 </View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    columnGap: 4,
-                  }}
-                >
-                  <IconButton
-                    icon='theme-light-dark'
-                    iconColor={theme.colors.onPrimary}
+              ),
+            }}
+          >
+            <Drawer.Screen
+              name='index'
+              options={{
+                title: t('HOME'),
+                drawerIcon: ({ focused }) => (
+                  <MaterialIcons
                     size={24}
-                    onPress={toggleTheme}
+                    name='home'
+                    color={
+                      focused
+                        ? theme.colors.primary
+                        : theme.colors.onPrimaryContainer
+                    }
                   />
-                  <IconDropdown
-                    icon='translate'
-                    color={theme.colors.onPrimary}
-                    options={langs}
-                    onChange={changeLanguage}
-                    selectedOption={currentLanguage}
+                ),
+              }}
+            />
+            <Drawer.Screen
+              name='(tabs)'
+              options={{
+                title: t('TODOS'),
+                drawerIcon: ({ focused }) => (
+                  <MaterialIcons
+                    size={24}
+                    name='view-list'
+                    color={
+                      focused
+                        ? theme.colors.primary
+                        : theme.colors.onPrimaryContainer
+                    }
                   />
-                </View>
-              </View>
-            ),
-          }}
-        >
-          <Drawer.Screen
-            name='index'
-            options={{
-              title: t('HOME'),
-              drawerIcon: ({ focused }) => (
-                <MaterialIcons
-                  size={24}
-                  name='home'
-                  color={
-                    focused
-                      ? theme.colors.primary
-                      : theme.colors.onPrimaryContainer
-                  }
-                />
-              ),
-            }}
-          />
-          <Drawer.Screen
-            name='posts'
-            options={{
-              title: t('POSTS'),
-              drawerIcon: ({ focused }) => (
-                <MaterialIcons
-                  size={24}
-                  name='view-list'
-                  color={
-                    focused
-                      ? theme.colors.primary
-                      : theme.colors.onPrimaryContainer
-                  }
-                />
-              ),
-            }}
-          />
-          <Drawer.Screen
-            name='+not-found'
-            options={{
-              title: t('NOT_FOUND_PAGE'),
-              drawerItemStyle: { display: 'none' },
-            }}
-          />
-        </Drawer>
-      </GestureHandlerRootView>
+                ),
+              }}
+            />
+            <Drawer.Screen
+              name='+not-found'
+              options={{
+                title: t('NOT_FOUND_PAGE'),
+                drawerItemStyle: { display: 'none' },
+              }}
+            />
+            <Drawer.Screen
+              name='(stack)'
+              options={{
+                drawerItemStyle: { display: 'none' },
+              }}
+            />
+          </Drawer>
+        </GestureHandlerRootView>
+      </QueryClientProvider>
     </PaperProvider>
   )
 }
