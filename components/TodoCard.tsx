@@ -4,6 +4,7 @@ import { spacing } from '@/themes'
 import { Todo, User } from '@/types'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { useQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import { View, Pressable } from 'react-native'
 import { Card, Text, useTheme } from 'react-native-paper'
 
@@ -12,14 +13,16 @@ export default function TodoCard({
   handleViewUser,
 }: {
   todo: Todo
-  handleViewUser: () => void
+  handleViewUser?: () => void
 }) {
+  const { t } = useTranslation()
   const theme = useTheme()
 
   const { data: user, error } = useQuery<User>({
     queryKey: [CACHE_KEYS.USER, todo.userId],
     queryFn: () => getUser(todo.userId),
     staleTime: STALE_TIME,
+    enabled: todo.userId !== null,
   })
 
   return (
@@ -41,6 +44,7 @@ export default function TodoCard({
             <Pressable
               style={{ alignSelf: 'flex-start' }}
               onPress={handleViewUser}
+              disabled={!user}
             >
               <Text
                 variant='titleLarge'
@@ -51,7 +55,11 @@ export default function TodoCard({
                     : theme.colors.onPrimaryContainer,
                 }}
               >
-                {error ? 'n/a' : (user?.username ?? '...')}
+                {todo.userId === null
+                  ? t('GUEST')
+                  : error
+                    ? 'n/a'
+                    : (user?.username ?? '...')}
               </Text>
             </Pressable>
           }

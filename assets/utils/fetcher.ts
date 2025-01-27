@@ -1,7 +1,8 @@
-import { PLACEHOLDER_PATHS, PLACEHOLDER_ROOT_URL } from '../constants'
+import { Todo } from '@/types'
+import { ROOT_PATH, API_PATHS } from '../constants'
 
-export const fetcher = async (path: string) => {
-  const response = await fetch(path)
+export const fetcher = async (path: string, method = 'GET', body?: object) => {
+  const response = await fetch(path, { method, body: JSON.stringify(body) })
   if (!response.ok) {
     throw new Error('Response not ok')
   }
@@ -10,15 +11,17 @@ export const fetcher = async (path: string) => {
 }
 
 export const getTodos = async () => {
-  return await fetcher(`${PLACEHOLDER_ROOT_URL}${PLACEHOLDER_PATHS.TODOS}`)
+  return await fetcher(`${ROOT_PATH}${API_PATHS.POSTS}`)
+}
+
+export const postTodo = async (todo: Todo) => {
+  return await fetcher(`${ROOT_PATH}${API_PATHS.POSTS}`, 'POST', todo)
 }
 
 export const getUsers = async () => {
-  return await fetcher(`${PLACEHOLDER_ROOT_URL}${PLACEHOLDER_PATHS.USERS}`)
+  return await fetcher(`${ROOT_PATH}${API_PATHS.USERS}`)
 }
 
 export const getUser = async (id: number | null) => {
-  return await fetcher(
-    `${PLACEHOLDER_ROOT_URL}${PLACEHOLDER_PATHS.USERS}/${id}`,
-  )
+  return await fetcher(`${ROOT_PATH}${API_PATHS.USERS}/${id}`)
 }

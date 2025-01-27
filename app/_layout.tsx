@@ -18,12 +18,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import IconDropdown from '@/components/IconDropdown'
 import { darkTheme, lightTheme, fontConfig, spacing } from '@/themes'
 import { ThemeMode } from '@/types'
-import { ASYNC_STORAGE_KEYS } from '@/assets/constants'
-
-const langs = [
-  { label: 'EN', value: 'en' },
-  { label: 'FI', value: 'fi' },
-]
+import { ASYNC_STORAGE_KEYS, LANGUAGE_OPTIONS } from '@/assets/constants'
 
 const fonts = configureFonts({ config: fontConfig })
 
@@ -148,7 +143,7 @@ export default function RootLayout() {
                     <IconDropdown
                       icon='translate'
                       color={theme.colors.onPrimary}
-                      options={langs}
+                      options={LANGUAGE_OPTIONS}
                       onChange={changeLanguage}
                       selectedOption={currentLanguage}
                     />

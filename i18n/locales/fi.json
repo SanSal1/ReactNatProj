@@ -1,8 +1,12 @@
 {
+  "COMPLETED": "Tehty",
+  "CREATE": "Luo",
   "ERROR": "Virhe",
+  "GUEST": "Vieras",
   "HOME": "Koti",
   "LIST": "Lista",
   "NOT_FOUND_PAGE": "404: Sivua ei ole olemassa",
+  "TITLE": "Otsikko",
   "TODOS": "Muistiinpanot",
   "UNABLE_TO_FETCH": "Datan hakeminen palvelimelta epäonnistui",
   "USERS": "Käyttäjät"
