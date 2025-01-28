@@ -9,5 +9,6 @@
   "TITLE": "Otsikko",
   "TODOS": "Muistiinpanot",
   "UNABLE_TO_FETCH": "Datan hakeminen palvelimelta epäonnistui",
-  "USERS": "Käyttäjät"
+  "USERS": "Käyttäjät",
+  "VIEW_LOCATION_ON_MAP": "Katso sijainti kartalla"
 }

@@ -1,4 +1,5 @@
 import { CACHE_KEYS, STALE_TIME } from '@/assets/constants'
+import MapView from '@/components/MapView/MapView'
 import { getUser } from '@/assets/utils/fetcher'
 import { spacing } from '@/themes'
 import { User } from '@/types'
@@ -99,6 +100,10 @@ export default function UserModal({
           {user.company.bs}
         </Text>
       </View>
+      <MapView
+        longitude={Number(user.address.geo.lng)}
+        latitude={Number(user.address.geo.lat)}
+      />
     </ModalWrapper>
   )
 }

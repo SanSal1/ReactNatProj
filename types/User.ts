@@ -16,8 +16,8 @@ export interface User {
     city: string
     zipcode: string
     geo: {
-      lat: number
-      long: number
+      lat: string
+      lng: string
     }
   }
 }

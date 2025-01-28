@@ -9,5 +9,6 @@
   "TITLE": "Title",
   "TODOS": "Todos",
   "UNABLE_TO_FETCH": "Unable to fetch data from the server",
-  "USERS": "Users"
+  "USERS": "Users",
+  "VIEW_LOCATION_ON_MAP": "View location on map"
 }

@@ -9,8 +9,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
-import { FlatList } from 'react-native-gesture-handler'
+import { View, FlatList } from 'react-native'
 import { Button, Checkbox, TextInput, useTheme } from 'react-native-paper'
 
 export default function TodosListScreen() {
@@ -117,8 +116,8 @@ export default function TodosListScreen() {
               </View>
             </View>
           }
-          keyExtractor={(item) => item.id.toString()}
           data={todos}
+          keyExtractor={(item: any) => item.id.toString()}
           style={{ width: '100%' }}
           renderItem={({ item }) => (
             <TodoCard
